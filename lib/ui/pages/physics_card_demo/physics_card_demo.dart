@@ -1,4 +1,4 @@
-import 'package:animation/ui/pages/animation_controller/widgets/draggable_card.dart';
+import 'package:animation/ui/pages/physics_card_demo/widgets/draggable_card.dart';
 import 'package:flutter/material.dart';
 
 class PhysicsCardDemo extends StatelessWidget {

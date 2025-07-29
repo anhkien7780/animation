@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/physics.dart';
 
 class DraggableCard extends StatefulWidget {
   const DraggableCard({super.key, required this.child});
@@ -51,7 +52,7 @@ class _DraggableCardState extends State<DraggableCard>
         });
       },
       onPanEnd: (details) {
-        _runAnimation();
+        _runAnimation(details.velocity.pixelsPerSecond, size);
       },
       child: Align(
         alignment: _dragAlignment,
@@ -60,11 +61,16 @@ class _DraggableCardState extends State<DraggableCard>
     );
   }
 
-  void _runAnimation() {
+  void _runAnimation(Offset pixelsPerSecond, Size size) {
     _animation = _controller.drive(
       AlignmentTween(begin: _dragAlignment, end: Alignment.center),
     );
-    _controller.reset();
-    _controller.forward();
+    final unitsPerSecondX = pixelsPerSecond.dx / size.width;
+    final unitsPerSecondY = pixelsPerSecond.dy / size.height;
+    final unitsPerSecond = Offset(unitsPerSecondX, unitsPerSecondY);
+    final unitVelocity = unitsPerSecond.distance;
+    const spring = SpringDescription(mass: 10, stiffness: 500, damping: 15);
+    final simulator = SpringSimulation(spring, 0, 1, -unitVelocity);
+    _controller.animateWith(simulator);
   }
 }

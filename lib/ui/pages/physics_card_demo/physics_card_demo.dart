@@ -1,3 +1,4 @@
+import 'package:animation/common/app_bar.dart';
 import 'package:animation/ui/pages/physics_card_demo/widgets/draggable_card.dart';
 import 'package:flutter/material.dart';
 
@@ -7,14 +8,7 @@ class PhysicsCardDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back),
-        ),
-      ),
+      appBar: buildAppBar(context),
       body: const DraggableCard(child: FlutterLogo(size: 128)),
     );
   }

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:animation/common/app_bar.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedContainerApp extends StatefulWidget {
@@ -18,6 +19,7 @@ class _AnimatedContainerAppState extends State<AnimatedContainerApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: buildAppBar(context),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
